@@ -7,8 +7,22 @@ const List = ({ text, todos, setTodos, id, setUserInput }) => {
   };
 
   const editHandler = () => {
-    setUserInput(text);
-    deleteHandler();
+       setUserInput(text);
+      setTodos(
+        todos.map((elem) => {
+          if (elem.id === id) {
+            return { ...elem, value: userInput };
+          }
+          return elem;
+        })
+      );
+
+      if (document.querySelector(".edit_btn").innerHTML === "Edit") {
+        document.querySelector(".edit_btn").innerHTML = "Update";
+      } else if (document.querySelector(".edit_btn").innerHTML === "Update") {
+        document.querySelector(".edit_btn").innerHTML = "Edit";
+      }
+
   };
 
   return (
